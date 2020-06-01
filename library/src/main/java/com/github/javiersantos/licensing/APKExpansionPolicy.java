@@ -347,7 +347,10 @@ public class APKExpansionPolicy implements Policy {
         if (mLastResponse == Policy.LICENSED) {
             // Check if the LICENSED response occurred within the validity
             // timeout.
-            return ts <= mValidityTimestamp;
+            if (ts <= mValidityTimestamp) {
+                // Cached LICENSED response is still valid.
+                return true;
+            }
         } else if (mLastResponse == Policy.RETRY &&
                 ts < mLastResponseTime + MILLIS_PER_MINUTE) {
             // Only allow access if we are within the retry period or we haven't

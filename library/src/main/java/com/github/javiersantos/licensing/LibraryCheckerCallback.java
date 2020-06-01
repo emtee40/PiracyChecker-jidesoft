@@ -31,12 +31,12 @@ public interface LibraryCheckerCallback {
     /**
      * Application error codes.
      */
-    int ERROR_INVALID_PACKAGE_NAME = 1;
-    int ERROR_NON_MATCHING_UID = 2;
-    int ERROR_NOT_MARKET_MANAGED = 3;
-    int ERROR_CHECK_IN_PROGRESS = 4;
-    int ERROR_INVALID_PUBLIC_KEY = 5;
-    int ERROR_MISSING_PERMISSION = 6;
+    int ERROR_INVALID_PACKAGE_NAME = 1212;
+    int ERROR_NON_MATCHING_UID = 2373;
+    int ERROR_NOT_MARKET_MANAGED = 96431;
+    int ERROR_CHECK_IN_PROGRESS = 42619;
+    int ERROR_INVALID_PUBLIC_KEY = 512643;
+    int ERROR_MISSING_PERMISSION = 6321;
 
     /**
      * Allow use. App should proceed as normal.

@@ -20,7 +20,6 @@ import com.github.javiersantos.licensing.util.Base64;
 import com.github.javiersantos.licensing.util.Base64DecoderException;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.spec.KeySpec;
 
@@ -79,7 +78,7 @@ public class AESObfuscator implements Obfuscator {
         try {
             // Header is appended as an integrity check
             return Base64.encode(mEncryptor.doFinal((header + key + original).getBytes(UTF8)));
-        } catch (GeneralSecurityException | UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException | GeneralSecurityException e) {
             throw new RuntimeException("Invalid environment", e);
         }
     }
@@ -97,9 +96,11 @@ public class AESObfuscator implements Obfuscator {
                 throw new ValidationException("Header not found (invalid data or key)" + ":" +
                                                       obfuscated);
             }
-            return result.substring(header.length() + key.length());
-        } catch (Base64DecoderException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
+            return result.substring(header.length() + key.length(), result.length());
+        } catch (Base64DecoderException | IllegalBlockSizeException | BadPaddingException e) {
             throw new ValidationException(e.getMessage() + ":" + obfuscated);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("Invalid environment", e);
         }
     }
 }
